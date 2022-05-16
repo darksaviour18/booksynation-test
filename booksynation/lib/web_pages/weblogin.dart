@@ -215,6 +215,7 @@ class _WebLoginState extends State<WebLogin> {
                                           _passwordVisible
                                               ? Icons.visibility
                                               : Icons.visibility_off,
+                                          key: Key("passVisibIcon"),
                                           color: Colors.grey[700]),
                                     ),
                                   ),
