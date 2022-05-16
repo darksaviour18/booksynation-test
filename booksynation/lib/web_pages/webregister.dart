@@ -123,6 +123,7 @@ class _WebRegisterState extends State<WebRegister> {
                                     height: height * 0.010,
                                   ),
                                   TextFormField(
+                                    key: Key("emailFormField"),
                                     controller: emailController,
                                     decoration: InputDecoration(
                                       suffixIcon: Icon(
@@ -136,6 +137,7 @@ class _WebRegisterState extends State<WebRegister> {
                                     height: height * 0.010,
                                   ),
                                   TextFormField(
+                                    key: Key("regFirstNameForm"),
                                     controller: firstNameController,
                                     decoration: InputDecoration(
                                       suffixIcon: Icon(
@@ -149,6 +151,7 @@ class _WebRegisterState extends State<WebRegister> {
                                     height: height * 0.010,
                                   ),
                                   TextFormField(
+                                    key: Key("regLastNameForm"),
                                     controller: lastNameController,
                                     decoration: InputDecoration(
                                       suffixIcon: Icon(
@@ -162,6 +165,7 @@ class _WebRegisterState extends State<WebRegister> {
                                     height: height * 0.010,
                                   ),
                                   TextFormField(
+                                    key: Key("regPassField"),
                                     controller: passwordController,
                                     obscureText: true,
                                     decoration: InputDecoration(
@@ -172,6 +176,7 @@ class _WebRegisterState extends State<WebRegister> {
                                     height: height * 0.010,
                                   ),
                                   TextFormField(
+                                    key: Key("regConfirmPassField"),
                                     controller: cpasswordController,
                                     obscureText: true,
                                     decoration: InputDecoration(
@@ -194,6 +199,7 @@ class _WebRegisterState extends State<WebRegister> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   ElevatedButton(
+                                    key: Key("regButton"),
                                     onPressed: () async {
                                       final isValid =
                                           _formKey.currentState!.validate();
@@ -227,6 +233,8 @@ class _WebRegisterState extends State<WebRegister> {
                                                   const SnackBar(
                                                     content: Text(
                                                       regSuccessSnackbar,
+                                                      key: Key(
+                                                          regSuccessSnackbar),
                                                     ),
                                                   ),
                                                 );

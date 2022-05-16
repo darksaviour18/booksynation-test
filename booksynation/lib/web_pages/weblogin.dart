@@ -150,6 +150,7 @@ class _WebLoginState extends State<WebLogin> {
                                   height: height * 0.005,
                                 ),
                                 TextField(
+                                  key: Key("webLoginEmailField"),
                                   controller: emailController,
                                   decoration: InputDecoration(
                                     enabledBorder: OutlineInputBorder(
@@ -185,6 +186,7 @@ class _WebLoginState extends State<WebLogin> {
                                   height: height * 0.005,
                                 ),
                                 TextFormField(
+                                  key: Key("webLoginPassField"),
                                   keyboardType: TextInputType.text,
                                   controller: passwordController,
                                   obscureText: !_passwordVisible,
@@ -223,6 +225,7 @@ class _WebLoginState extends State<WebLogin> {
                               ],
                             ),
                             ElevatedButton(
+                              key: Key("webLoginButton"),
                               onPressed: () async {
                                 try {
                                   await auth
