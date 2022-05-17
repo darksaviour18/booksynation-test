@@ -7,11 +7,12 @@ import 'package:booksynation/strings.dart';
 import 'test_helpers.dart';
 
 void main() {
+  List<String> testOutput = [];
+  int passedTests = 0;
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group("Authentication - ", () {
-    testWidgets('Check if app allows user to create account in admin UI. ',
-        (WidgetTester tester) async {
+    testWidgets('Register an account', (WidgetTester tester) async {
       app.main();
       await tester.pumpAndSettle();
       testOutput.add("Test Started: " + testDateWithTime);
@@ -19,8 +20,7 @@ void main() {
       final Finder signUpButton =
           find.widgetWithText(GestureDetector, 'Sign Up');
       await tester.tap(signUpButton);
-      tester.printToConsole("Going to Sign Up Page");
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+      await tester.pumpAndSettle();
       try {
         expect(signUpButton, findsNothing);
         testOutput.add(
@@ -48,14 +48,13 @@ void main() {
 
       final Finder regButton = find.byKey(Key("regButton"));
       await tester.tap(regButton);
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 2));
       final Finder regSuccess = find.byKey(Key(regSuccessSnackbar));
-      await Future.delayed(const Duration(seconds: 5), () {});
-      await tester.tap(find.byKey(Key("regBackButton")), warnIfMissed: true);
+      await tester.ensureVisible(regSuccess);
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
       try {
-        expect(find.text(createAccText), findsNothing); //AWUI_AUTH1
+        expect(regSuccess, findsOneWidget); //AWUI_AUTH1
         testOutput.add(
             "Check if app allows user to create account in admin UI. -- PASSED");
         passedTests++;
@@ -78,7 +77,7 @@ void main() {
 
       final Finder loginButton = find.byKey(Key("webLoginButton"));
       await tester.tap(loginButton);
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+      await tester.pumpAndSettle(const Duration(seconds: 3));
       try {
         expect(loginButton, findsNothing);
         testOutput.add(

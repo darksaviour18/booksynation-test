@@ -1,10 +1,7 @@
 import 'package:intl/intl.dart';
 
-List<String> testOutput = [];
-int passedTests = 0;
-
 DateTime now = DateTime.now();
-var dateFormat = new DateFormat('MMddyy-mm');
+var dateFormat = new DateFormat('MMddyy-HHmmss');
 
 var dateWithTimeFormat = new DateFormat("yyyy-MM-dd HH:mm:ss");
 String testDate = dateFormat.format(now);

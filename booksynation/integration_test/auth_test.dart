@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:booksynation/strings.dart';
 
 void testAuth() {
+  List<String> testOutput = [];
+  int passedTests = 0;
   testWidgets('Check if app allows user to create account in admin UI. ',
       (WidgetTester tester) async {
     app.main();

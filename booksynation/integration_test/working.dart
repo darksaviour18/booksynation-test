@@ -6,6 +6,8 @@ import 'package:booksynation/strings.dart';
 import 'test_helpers.dart';
 
 void main() {
+  List<String> testOutput = [];
+  int passedTests = 0;
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   group("Authentication - ", () {
     //AWUL_AUTH1 and AWUL_AUTH2
