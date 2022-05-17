@@ -20,9 +20,11 @@ void printResults(List<String> results, int successCount) {
   for (String result in results) {
     if (result.contains("PASSED")) {
       printSuccess(result);
-    } else {
+    } else if (result.contains("FAILED")) {
       printFailed(result);
+    } else {
+      print(result);
     }
   }
-  print("$successCount/${results.length} passed the test.");
+  print("$successCount/${results.length - 1} passed the test.");
 }
