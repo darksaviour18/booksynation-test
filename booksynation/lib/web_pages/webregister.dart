@@ -256,6 +256,8 @@ class _WebRegisterState extends State<WebRegister> {
                                                 const SnackBar(
                                                   content: Text(
                                                     regFailedSnackbar,
+                                                    key: Key(
+                                                        "regFailedSnackbar"),
                                                   ),
                                                 ),
                                               );
