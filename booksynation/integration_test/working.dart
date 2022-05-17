@@ -40,7 +40,7 @@ void main() {
 
       Finder regButton = find.byKey(Key("regButton"));
       tester.tap(regButton);
-      await tester.pumpAndSettle(const Duration(seconds: 7));
+      await tester.pumpAndSettle(const Duration(seconds: 5));
 
       Finder regSuccess = find.byKey(Key(regSuccessSnackbar));
 
@@ -149,7 +149,7 @@ void main() {
       await tester.pumpAndSettle();
       Finder regButton = find.byKey(Key("regButton"));
       tester.tap(regButton);
-      await tester.pumpAndSettle(const Duration(seconds: 7));
+      await Future.delayed(const Duration(seconds: 10), () {});
       //Should display "Email address is not valid"
     });
     //AWU_AUTH6
@@ -157,7 +157,7 @@ void main() {
         "Check application's signup behavior when email provided is already registered.",
         (tester) async {
       app.main();
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 5));
 
       final signUpButton = find.widgetWithText(GestureDetector, 'Sign Up');
       expect(signUpButton, findsOneWidget);
@@ -178,8 +178,37 @@ void main() {
       await tester.pumpAndSettle();
       Finder regButton = find.byKey(Key("regButton"));
       tester.tap(regButton);
-      await tester.pumpAndSettle();
+      await Future.delayed(const Duration(seconds: 5), () {});
       //Should display "Registration Error"
+    });
+    //AWU_AUTH7
+    testWidgets(
+        "Check application's signup behavior when confirm password does not align with provided password.",
+        (tester) async {
+      app.main();
+      await tester.pumpAndSettle();
+
+      final signUpButton = find.widgetWithText(GestureDetector, 'Sign Up');
+      expect(signUpButton, findsOneWidget);
+      await tester.tap(signUpButton);
+      tester.printToConsole("Going to Sign Up Page");
+      await tester.pumpAndSettle();
+
+      Finder emailField = find.byKey(Key("emailFormField"));
+      await tester.enterText(emailField, "testemail@gmail.com");
+      Finder firstNameField = find.byKey(Key("regFirstNameForm"));
+      await tester.enterText(firstNameField, "Test");
+      Finder lastNameField = find.byKey(Key("regLastNameForm"));
+      await tester.enterText(lastNameField, "Account");
+      Finder passField = find.byKey(Key("regPassField"));
+      Finder confirmPass = find.byKey(Key("regConfirmPassField"));
+      await tester.enterText(passField, "P@ssword");
+      await tester.enterText(confirmPass, "P@ss123");
+      await tester.pumpAndSettle();
+      Finder regButton = find.byKey(Key("regButton"));
+      tester.tap(regButton);
+      await Future.delayed(const Duration(seconds: 5), () {});
+      //Should display "Wrong password"
     });
     //AWU_AUTH8
     testWidgets(
@@ -196,7 +225,7 @@ void main() {
       await tester.pumpAndSettle();
       Finder loginButton = find.byKey(Key("webLoginButton"));
       await tester.tap(loginButton);
-      await tester.pumpAndSettle(const Duration(seconds: 7));
+      await tester.pumpAndSettle(const Duration(seconds: 15));
       expect(loginButton, findsNothing);
       //Should display "Login Error"
     });
@@ -205,7 +234,7 @@ void main() {
         "Check application's login behavior when password provided is incorrect.",
         (tester) async {
       app.main();
-      await tester.pumpAndSettle(const Duration(seconds: 5));
+      await tester.pumpAndSettle();
 
       Finder loginEmailField = find.byKey(Key("webLoginEmailField"));
       await tester.enterText(loginEmailField, "claudettelaroa@gmail.com");
