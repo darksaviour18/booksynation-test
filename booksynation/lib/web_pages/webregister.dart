@@ -111,7 +111,10 @@ class _WebRegisterState extends State<WebRegister> {
                                     children: [
                                       InkWell(
                                         onTap: () => Navigator.pop(context),
-                                        child: Icon(Icons.arrow_back),
+                                        child: Icon(
+                                          Icons.arrow_back,
+                                          key: Key("regBackButton"),
+                                        ),
                                       ),
                                       SizedBox(
                                         width: width * 0.025,

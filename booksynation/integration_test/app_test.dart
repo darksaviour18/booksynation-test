@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -12,96 +13,110 @@ void main() {
     testWidgets('Check if app allows user to create account in admin UI. ',
         (WidgetTester tester) async {
       app.main();
-
       await tester.pumpAndSettle();
+      testOutput.add("Test Started: " + testDateWithTime);
 
-      final signUpButton = find.widgetWithText(GestureDetector, 'Sign Up');
-      expect(signUpButton, findsOneWidget);
+      final Finder signUpButton =
+          find.widgetWithText(GestureDetector, 'Sign Up');
       await tester.tap(signUpButton);
       tester.printToConsole("Going to Sign Up Page");
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+      try {
+        expect(signUpButton, findsNothing);
+        testOutput.add(
+            "Check if tapping Sign Up text redirects user to Sign Up page. -- PASSED");
+        passedTests++;
+      } on Exception catch (e) {
+        testOutput.add(
+            "Check if tapping Sign Up text redirects user to Sign Up page. -- FAILED");
+      }
 
-      Finder emailField = find.byKey(Key("emailFormField"));
+      final Finder emailField = find.byKey(Key("emailFormField"));
       await tester.enterText(emailField, sampleEmail);
 
-      Finder firstNameField = find.byKey(Key("regFirstNameForm"));
+      final Finder firstNameField = find.byKey(Key("regFirstNameForm"));
       await tester.enterText(firstNameField, "Test");
 
-      Finder lastNameField = find.byKey(Key("regLastNameForm"));
+      final Finder lastNameField = find.byKey(Key("regLastNameForm"));
       await tester.enterText(lastNameField, "Account");
-      Finder passField = find.byKey(Key("regPassField"));
-      Finder confirmPass = find.byKey(Key("regConfirmPassField"));
+      final Finder passField = find.byKey(Key("regPassField"));
+      final Finder confirmPass = find.byKey(Key("regConfirmPassField"));
 
       await tester.enterText(passField, "P@ssword");
       await tester.enterText(confirmPass, "P@ssword");
       await tester.pumpAndSettle();
 
-      Finder regButton = find.byKey(Key("regButton"));
-      tester.tap(regButton);
-
-      Finder regSuccess = find.byKey(Key(regSuccessSnackbar));
+      final Finder regButton = find.byKey(Key("regButton"));
+      await tester.tap(regButton);
+      await tester.pumpAndSettle();
+      final Finder regSuccess = find.byKey(Key(regSuccessSnackbar));
+      await Future.delayed(const Duration(seconds: 5), () {});
+      await tester.tap(find.byKey(Key("regBackButton")), warnIfMissed: true);
+      await tester.pumpAndSettle(const Duration(seconds: 2));
 
       try {
-        await tester.pumpAndSettle(const Duration(seconds: 10));
-        await tester.ensureVisible(regSuccess);
-        await Future.delayed(const Duration(seconds: 5), () {});
-        expect(regSuccess, findsOneWidget); //AWUI_AUTH1
-        debugPrint(
+        expect(find.text(createAccText), findsNothing); //AWUI_AUTH1
+        testOutput.add(
             "Check if app allows user to create account in admin UI. -- PASSED");
         passedTests++;
         tester.printToConsole("Passed Tests: " + passedTests.toString());
-      } on Exception catch (e) {
-        debugPrint(
+      } on FirebaseAuthException catch (e) {
+        testOutput.add(
+            "Check if app allows user to create account in admin UI. -- FAILED");
+      } catch (error) {
+        testOutput.add(
             "Check if app allows user to create account in admin UI. -- FAILED");
       }
-      printResults(testOutput, passedTests);
-    });
-    testWidgets("Check if app allows user to login using the created account.",
-        (tester) async {
-      app.main();
-      await tester.pumpAndSettle();
 
-      Finder loginEmailField = find.byKey(Key("webLoginEmailField"));
+      final Finder loginEmailField = find.byKey(Key("webLoginEmailField"));
       await tester.enterText(loginEmailField, sampleEmail);
       await tester.pumpAndSettle();
 
-      Finder loginPassField = find.byKey(Key("webLoginPassField"));
+      final Finder loginPassField = find.byKey(Key("webLoginPassField"));
       await tester.enterText(loginPassField, "P@ssword");
       await tester.pumpAndSettle();
 
-      Finder loginButton = find.byKey(Key("webLoginButton"));
+      final Finder loginButton = find.byKey(Key("webLoginButton"));
       await tester.tap(loginButton);
-      await tester.pumpAndSettle(const Duration(seconds: 5));
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+      try {
+        expect(loginButton, findsNothing);
+        testOutput.add(
+            "Check if app allows user to login using the created account. -- PASSED");
+        passedTests++;
+      } on Exception catch (e) {
+        testOutput.add(
+            "Check if app allows user to login using the created account. -- FAILED");
+      } //AWUI_AUTH2
 
-      expect(loginButton, findsNothing); //AWUI_AUTH2
-
-      Finder schedVac = find.text("Scheduled Vaccinations");
+      final Finder schedVac = find.text("Scheduled Vaccinations");
       await tester.tap(schedVac);
-      await tester.pumpAndSettle(const Duration(seconds: 10));
+      await tester.pumpAndSettle(const Duration(seconds: 2));
 
       expect(find.text(scheduledVaxSection), findsOneWidget); //AWUI_SIDE1
 
-      Finder missedVac = find.text("Missed Vaccinations");
+      final Finder missedVac = find.text("Missed Vaccinations");
       await tester.tap(missedVac);
-      await tester.pumpAndSettle(const Duration(seconds: 10));
+      await tester.pumpAndSettle(const Duration(seconds: 2));
 
       expect(find.text(reschedPatientText), findsOneWidget); //AWUI_SIDE2
 
-      Finder accSettings = find.text("Account Settings");
+      final Finder accSettings = find.text("Account Settings");
       await tester.tap(accSettings);
-      await tester.pumpAndSettle(const Duration(seconds: 10));
+      await tester.pumpAndSettle(const Duration(seconds: 2));
 
       expect(find.text(settingsSection), findsOneWidget); //AWUI_SIDE3
 
-      Finder manageVax = find.text("Manage Vaccines");
+      final Finder manageVax = find.text("Manage Vaccines");
       await tester.tap(manageVax);
-      await tester.pumpAndSettle(const Duration(seconds: 10));
+      await tester.pumpAndSettle(const Duration(seconds: 2));
 
-      Finder signOutButton = find.text("Sign-out");
+      final Finder signOutButton = find.text("Sign-out");
       await tester.tap(signOutButton);
-      await tester.pumpAndSettle(const Duration(seconds: 10));
+      await tester.pumpAndSettle(const Duration(seconds: 2));
 
       expect(find.text(logInWebText), findsOneWidget); //AWUI_SIDE5
+      printResults(testOutput, passedTests);
     });
   });
 }
