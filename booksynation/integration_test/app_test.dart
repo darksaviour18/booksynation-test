@@ -15,7 +15,7 @@ void main() {
     testWidgets('Register an account', (WidgetTester tester) async {
       app.main();
       await tester.pumpAndSettle();
-      testOutput.add("Test Results -- " + testDateWithTime);
+      testOutput.add("\n\nTest Results -- " + testDateWithTime + "\n");
 
       final Finder signUpButton =
           find.widgetWithText(GestureDetector, 'Sign Up');
@@ -337,6 +337,16 @@ void main() {
       final Finder loginButton = find.byKey(Key("webLoginButton"));
       await tester.tap(loginButton);
       await tester.pumpAndSettle(const Duration(seconds: 7));
+
+      try {
+        expect(find.text(sampleEmail), findsOneWidget);
+        testOutput.add(
+            "Check if the created account email is the same in Side Menu. -- PASSED");
+        passedTests++;
+      } catch (error) {
+        testOutput.add(
+            "Check if the created account email is the same in Side Menu. -- FAILED");
+      }
 
       final Finder schedVac = find.text("Scheduled Vaccinations");
       await tester.tap(schedVac);
