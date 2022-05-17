@@ -5,7 +5,10 @@ int passedTests = 0;
 
 DateTime now = DateTime.now();
 var dateFormat = new DateFormat('MMddyy-mm');
+
+var dateWithTimeFormat = new DateFormat("yyyy-MM-dd HH:mm:ss");
 String testDate = dateFormat.format(now);
+String testDateWithTime = dateWithTimeFormat.format(now);
 String sampleEmail = "test" + testDate + "@email.com";
 
 void printFailed(String text) {
