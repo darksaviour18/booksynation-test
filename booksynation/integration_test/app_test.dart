@@ -15,7 +15,6 @@ void main() {
     testWidgets('Register an account', (WidgetTester tester) async {
       app.main();
       await tester.pumpAndSettle();
-      testOutput.add("Test Started: " + testDateWithTime);
 
       final Finder signUpButton =
           find.widgetWithText(GestureDetector, 'Sign Up');
@@ -66,6 +65,10 @@ void main() {
         testOutput.add(
             "Check if app allows user to create account in admin UI. -- FAILED");
       }
+    });
+    testWidgets('Login account and check side menu navigation', (tester) async {
+      app.main();
+      await tester.pumpAndSettle();
 
       final Finder loginEmailField = find.byKey(Key("webLoginEmailField"));
       await tester.enterText(loginEmailField, sampleEmail);
@@ -77,7 +80,7 @@ void main() {
 
       final Finder loginButton = find.byKey(Key("webLoginButton"));
       await tester.tap(loginButton);
-      await tester.pumpAndSettle(const Duration(seconds: 3));
+      await tester.pumpAndSettle(const Duration(seconds: 7));
       try {
         expect(loginButton, findsNothing);
         testOutput.add(
