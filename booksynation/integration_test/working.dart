@@ -38,6 +38,7 @@ void main() {
 
       Finder regButton = find.byKey(Key("regButton"));
       tester.tap(regButton);
+      await tester.pumpAndSettle(const Duration(seconds: 7));
 
       Finder regSuccess = find.byKey(Key(regSuccessSnackbar));
 
@@ -134,7 +135,7 @@ void main() {
       await tester.pumpAndSettle();
 
       Finder emailField = find.byKey(Key("emailFormField"));
-      await tester.enterText(emailField, "testerEmail");
+      await tester.enterText(emailField, "TesterEmail");
       Finder firstNameField = find.byKey(Key("regFirstNameForm"));
       await tester.enterText(firstNameField, "Test");
       Finder lastNameField = find.byKey(Key("regLastNameForm"));
@@ -146,7 +147,7 @@ void main() {
       await tester.pumpAndSettle();
       Finder regButton = find.byKey(Key("regButton"));
       tester.tap(regButton);
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 7));
       //Should display "Email address is not valid"
     });
     //AWU_AUTH6
