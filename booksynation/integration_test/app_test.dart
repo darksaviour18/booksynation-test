@@ -19,8 +19,6 @@ void main() {
       await tester.pumpAndSettle();
       testOutput.add("\n\nTest Results -- " + testDateWithTime + "\n");
 
-      final Finder signUpButton =
-          find.widgetWithText(GestureDetector, 'Sign Up');
       await tester.tap(signUpButton);
       await tester.pumpAndSettle();
       try {
@@ -34,25 +32,19 @@ void main() {
             "Check if tapping Sign Up text redirects user to Sign Up page. -- FAILED");
       }
 
-      final Finder emailField = find.byKey(Key("emailFormField"));
       await tester.enterText(emailField, testEmailInstance);
 
-      final Finder firstNameField = find.byKey(Key("regFirstNameForm"));
       await tester.enterText(firstNameField, "Test");
 
-      final Finder lastNameField = find.byKey(Key("regLastNameForm"));
       await tester.enterText(lastNameField, "Account");
-      final Finder passField = find.byKey(Key("regPassField"));
-      final Finder confirmPass = find.byKey(Key("regConfirmPassField"));
 
       await tester.enterText(passField, "P@ssword");
       await tester.enterText(confirmPass, "P@ssword");
       await tester.pumpAndSettle();
 
-      final Finder regButton = find.byKey(Key("regButton"));
       await tester.tap(regButton);
       await tester.pumpAndSettle(const Duration(seconds: 2));
-      final Finder regSuccess = find.text(regSuccessSnackbar);
+
       await tester.pumpAndSettle(const Duration(seconds: 5));
       await Future.delayed(const Duration(seconds: 5), () {});
 
@@ -72,15 +64,12 @@ void main() {
       app.main();
       await tester.pumpAndSettle();
 
-      final Finder loginEmailField = find.byKey(Key("webLoginEmailField"));
       await tester.enterText(loginEmailField, testEmailInstance);
       await tester.pumpAndSettle();
 
-      final Finder loginPassField = find.byKey(Key("webLoginPassField"));
       await tester.enterText(loginPassField, "P@ssword");
       await tester.pumpAndSettle();
 
-      final Finder loginButton = find.byKey(Key("webLoginButton"));
       await tester.tap(loginButton);
       await tester.pumpAndSettle(const Duration(seconds: 7));
       try {
@@ -99,13 +88,12 @@ void main() {
       app.main();
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
-      Finder loginEmailField = find.byKey(Key("webLoginEmailField"));
       await tester.enterText(loginEmailField, "claudettelaroa@gmail.com");
       await tester.pumpAndSettle();
-      Finder loginPassField = find.byKey(Key("webLoginPassField"));
+
       await tester.enterText(loginPassField, "pass123");
       await tester.pumpAndSettle();
-      Finder passVisib = find.byKey(Key("passVisibIcon"));
+
       await tester.tap(passVisib);
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
@@ -131,20 +119,16 @@ void main() {
       await tester.tap(signUpButton);
       await tester.pumpAndSettle();
 
-      Finder emailField = find.byKey(Key("emailFormField"));
       await tester.enterText(emailField, "TesterEmail-testmail.com");
-      Finder firstNameField = find.byKey(Key("regFirstNameForm"));
+
       await tester.enterText(firstNameField, "Test");
-      Finder lastNameField = find.byKey(Key("regLastNameForm"));
+
       await tester.enterText(lastNameField, "Account");
-      Finder passField = find.byKey(Key("regPassField"));
-      Finder confirmPass = find.byKey(Key("regConfirmPassField"));
 
       await tester.enterText(passField, "P@ssword");
       await tester.enterText(confirmPass, "P@ssword");
       await tester.pumpAndSettle();
 
-      Finder regButton = find.byKey(Key("regButton"));
       await tester.tap(regButton);
       await tester.pumpAndSettle(const Duration(seconds: 2));
       await Future.delayed(const Duration(seconds: 10), () {});
@@ -170,18 +154,16 @@ void main() {
       await tester.tap(signUpButton);
       await tester.pumpAndSettle();
 
-      Finder emailField = find.byKey(Key("emailFormField"));
       await tester.enterText(emailField, "claudettelaroa@gmail.com");
-      Finder firstNameField = find.byKey(Key("regFirstNameForm"));
+
       await tester.enterText(firstNameField, "Test");
-      Finder lastNameField = find.byKey(Key("regLastNameForm"));
+
       await tester.enterText(lastNameField, "Account");
-      Finder passField = find.byKey(Key("regPassField"));
-      Finder confirmPass = find.byKey(Key("regConfirmPassField"));
+
       await tester.enterText(passField, "P@ssword");
       await tester.enterText(confirmPass, "P@ssword");
       await tester.pumpAndSettle();
-      Finder regButton = find.byKey(Key("regButton"));
+
       await tester.tap(regButton);
       await tester.pumpAndSettle(const Duration(seconds: 2));
       await Future.delayed(const Duration(seconds: 5), () {});
@@ -209,18 +191,16 @@ void main() {
       await tester.tap(signUpButton);
       await tester.pumpAndSettle();
 
-      Finder emailField = find.byKey(Key("emailFormField"));
       await tester.enterText(emailField, "testemail@gmail.com");
-      Finder firstNameField = find.byKey(Key("regFirstNameForm"));
+
       await tester.enterText(firstNameField, "Test");
-      Finder lastNameField = find.byKey(Key("regLastNameForm"));
+
       await tester.enterText(lastNameField, "Account");
-      Finder passField = find.byKey(Key("regPassField"));
-      Finder confirmPass = find.byKey(Key("regConfirmPassField"));
+
       await tester.enterText(passField, "P@ssword");
       await tester.enterText(confirmPass, "P@ss123");
       await tester.pumpAndSettle();
-      Finder regButton = find.byKey(Key("regButton"));
+
       await tester.tap(regButton);
       await tester.pumpAndSettle(const Duration(seconds: 2));
       await Future.delayed(const Duration(seconds: 5), () {});
@@ -242,13 +222,12 @@ void main() {
       app.main();
       await tester.pumpAndSettle();
 
-      Finder loginEmailField = find.byKey(Key("webLoginEmailField"));
       await tester.enterText(loginEmailField, "claudettelaroa");
       await tester.pumpAndSettle();
-      Finder loginPassField = find.byKey(Key("webLoginPassField"));
+
       await tester.enterText(loginPassField, "pass123");
       await tester.pumpAndSettle();
-      Finder loginButton = find.byKey(Key("webLoginButton"));
+
       await tester.tap(loginButton);
       await tester.pumpAndSettle(const Duration(seconds: 5));
       await Future.delayed(const Duration(seconds: 5), () {});
@@ -270,13 +249,12 @@ void main() {
       app.main();
       await tester.pumpAndSettle();
 
-      Finder loginEmailField = find.byKey(Key("webLoginEmailField"));
       await tester.enterText(loginEmailField, "claudettelaroa@gmali.com");
       await tester.pumpAndSettle();
-      Finder loginPassField = find.byKey(Key("webLoginPassField"));
+
       await tester.enterText(loginPassField, "pass123");
       await tester.pumpAndSettle();
-      Finder loginButton = find.byKey(Key("webLoginButton"));
+
       await tester.tap(loginButton);
       await tester.pumpAndSettle(const Duration(seconds: 5));
       await Future.delayed(const Duration(seconds: 5), () {});
@@ -298,13 +276,12 @@ void main() {
       app.main();
       await tester.pumpAndSettle();
 
-      Finder loginEmailField = find.byKey(Key("webLoginEmailField"));
       await tester.enterText(loginEmailField, "claudettelaroa@gmail.com");
       await tester.pumpAndSettle();
-      Finder loginPassField = find.byKey(Key("webLoginPassField"));
+
       await tester.enterText(loginPassField, "password");
       await tester.pumpAndSettle();
-      Finder loginButton = find.byKey(Key("webLoginButton"));
+
       await tester.tap(loginButton);
       await tester.pumpAndSettle(const Duration(seconds: 7));
       await Future.delayed(const Duration(seconds: 5), () {});
@@ -327,15 +304,12 @@ void main() {
       app.main();
       await tester.pumpAndSettle();
 
-      final Finder loginEmailField = find.byKey(Key("webLoginEmailField"));
       await tester.enterText(loginEmailField, testEmailInstance);
       await tester.pumpAndSettle();
 
-      final Finder loginPassField = find.byKey(Key("webLoginPassField"));
       await tester.enterText(loginPassField, "P@ssword");
       await tester.pumpAndSettle();
 
-      final Finder loginButton = find.byKey(Key("webLoginButton"));
       await tester.tap(loginButton);
       await tester.pumpAndSettle(const Duration(seconds: 7));
 
@@ -349,7 +323,6 @@ void main() {
             "Check if the created account email is the same in Side Menu. -- FAILED");
       }
 
-      final Finder schedVac = find.text("Scheduled Vaccinations");
       await tester.tap(schedVac);
       await tester.pumpAndSettle(const Duration(seconds: 2));
       try {
@@ -362,7 +335,6 @@ void main() {
             "Check app behavior when clicking the Scheduled Vaccinations item. -- FAILED");
       } //AWUI_SIDE1
 
-      final Finder missedVac = find.text("Missed Vaccinations");
       await tester.tap(missedVac);
       await tester.pumpAndSettle(const Duration(seconds: 2));
       try {
@@ -375,7 +347,6 @@ void main() {
             "Check app behavior when clicking the Missed Vaccinations item. -- FAILED");
       } //AWUI_SIDE2
 
-      final Finder accSettings = find.text("Account Settings");
       await tester.tap(accSettings);
       await tester.pumpAndSettle(const Duration(seconds: 2));
       try {
@@ -388,7 +359,6 @@ void main() {
             "Check app behavior when clicking the Account Settings item. -- FAILED");
       } //AWUI_SIDE3
 
-      final Finder manageVax = find.text("Manage Vaccines");
       await tester.tap(manageVax);
       await tester.pumpAndSettle(const Duration(seconds: 7));
 
@@ -406,19 +376,15 @@ void main() {
       app.main();
       await tester.pumpAndSettle();
 
-      final Finder loginEmailField = find.byKey(Key("webLoginEmailField"));
       await tester.enterText(loginEmailField, testEmailInstance);
       await tester.pumpAndSettle();
 
-      final Finder loginPassField = find.byKey(Key("webLoginPassField"));
       await tester.enterText(loginPassField, "P@ssword");
       await tester.pumpAndSettle();
 
-      final Finder loginButton = find.byKey(Key("webLoginButton"));
       await tester.tap(loginButton);
       await tester.pumpAndSettle(const Duration(seconds: 7));
 
-      final Finder signOutButton = find.text("Sign-out");
       await tester.tap(signOutButton);
       await tester.pumpAndSettle(const Duration(seconds: 2));
       try {
@@ -438,20 +404,18 @@ void main() {
       app.main();
       await tester.pumpAndSettle();
 
-      Finder loginEmailField = find.byKey(Key("webLoginEmailField"));
       await tester.enterText(loginEmailField, testEmailInstance);
       await tester.pumpAndSettle();
-      Finder loginPassField = find.byKey(Key("webLoginPassField"));
+
       await tester.enterText(loginPassField, "P@ssword");
       await tester.pumpAndSettle();
-      Finder loginButton = find.byKey(Key("webLoginButton"));
+
       await tester.tap(loginButton);
       await tester.pumpAndSettle(const Duration(seconds: 7));
-      Finder schedVac = find.text("Scheduled Vaccinations");
+
       await tester.tap(schedVac);
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
-      final Finder vaccineDropdown = find.byType(DropdownButton<String>);
       await tester.tap(vaccineDropdown);
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
       await tester.tap(find.widgetWithText(KeepAlive, 'Astrazeneca'));
@@ -546,16 +510,15 @@ void main() {
       app.main();
       await tester.pumpAndSettle();
 
-      Finder loginEmailField = find.byKey(Key("webLoginEmailField"));
       await tester.enterText(loginEmailField, testEmailInstance);
       await tester.pumpAndSettle();
-      Finder loginPassField = find.byKey(Key("webLoginPassField"));
+
       await tester.enterText(loginPassField, "P@ssword");
       await tester.pumpAndSettle();
-      Finder loginButton = find.byKey(Key("webLoginButton"));
+
       await tester.tap(loginButton);
       await tester.pumpAndSettle(const Duration(seconds: 7));
-      Finder missedVac = find.text(missedVaxSection);
+
       await tester.tap(missedVac);
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
@@ -610,7 +573,6 @@ void main() {
             "Check select all entries checkbox function in the data table. -- FAILED");
       }
 
-      final Finder vaccineDropdown = find.byType(DropdownButton<String>);
       await tester.tap(vaccineDropdown);
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
       await tester.tap(find.widgetWithText(KeepAlive, 'Astrazeneca'));
@@ -717,26 +679,20 @@ void main() {
       app.main();
       await tester.pumpAndSettle();
 
-      final Finder loginEmailField = find.byKey(Key("webLoginEmailField"));
       await tester.enterText(loginEmailField, testEmailInstance);
       await tester.pumpAndSettle();
 
-      final Finder loginPassField = find.byKey(Key("webLoginPassField"));
       await tester.enterText(loginPassField, "P@ssword");
       await tester.pumpAndSettle();
 
-      Finder passVisib = find.byKey(Key("passVisibIcon"));
       await tester.tap(passVisib);
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
-      final Finder loginButton = find.byKey(Key("webLoginButton"));
       await tester.tap(loginButton);
       await tester.pumpAndSettle(const Duration(seconds: 7));
 
       await tester.tap(find.text("Account Settings"));
       await tester.pumpAndSettle();
-
-      final Finder changePicButton = find.byIcon(Icons.add_a_photo);
 
       await tester.tap(changePicButton);
       await tester.pumpAndSettle(const Duration(seconds: 5));
@@ -752,11 +708,6 @@ void main() {
             "Check if app allows user to change the account profile picture. -- FAILED");
       }
 
-      final Finder currentPassField =
-          find.widgetWithText(TextFormField, "Current Password");
-      final Finder newPassField =
-          find.widgetWithText(TextFormField, "New Password");
-
       await tester.tap(currentPassField);
       await tester.pumpAndSettle();
       await tester.enterText(currentPassField, "P@ssword");
@@ -767,8 +718,6 @@ void main() {
       await tester.enterText(currentPassField, "new_pass");
       await tester.pumpAndSettle();
 
-      final Finder saveChangesButton =
-          find.widgetWithText(ElevatedButton, btnTextSave);
       await tester.tap(saveChangesButton);
       await tester.pumpAndSettle(const Duration(seconds: 7));
       await Future.delayed(const Duration(seconds: 5), () {});
