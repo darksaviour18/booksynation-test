@@ -2,9 +2,10 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:booksynation/strings.dart';
+import 'package:booksynation/web_pages/webmanage.dart';
 
 DateTime now = DateTime.now();
-var dateFormat = new DateFormat('MMddyy-HHmm');
+var dateFormat = new DateFormat('yMd');
 
 var dateWithTimeFormat = new DateFormat("yyyy-MM-dd HH:mm:ss");
 String testDate = dateFormat.format(now);
@@ -36,6 +37,12 @@ final Finder currentPassField =
 final Finder newPassField = find.widgetWithText(TextFormField, "New Password");
 final Finder saveChangesButton =
     find.widgetWithText(ElevatedButton, btnTextSave);
+final Finder patientToRemove = find.textContaining("Mervin");
+final Finder vaxDateStart = find.byKey(Key("datePickerStart"));
+final Finder vaxDateEnd = find.byKey(Key("datePickerEnd"));
+final Finder stockField = find.byKey(Key("stockFormField"));
+final Finder vaxDropdown = find.byKey(Key("vaccineDropdown"));
+final Finder categoryDropdown = find.byKey(Key("categoryDropdown"));
 
 void printFailed(String text) {
   print('\x1B[41m$text\x1B[0m');

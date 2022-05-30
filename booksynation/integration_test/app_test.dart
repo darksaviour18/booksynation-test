@@ -506,11 +506,11 @@ void main() {
     //AWUL_AUTH3
     testWidgets(
         "Check if app allows user to manage missed vaccination schedules.",
-        (WidgetTester tester) async {
+        (tester) async {
       app.main();
       await tester.pumpAndSettle();
 
-      await tester.enterText(loginEmailField, testEmailInstance);
+      await tester.enterText(loginEmailField, "docadam@gmail.com");
       await tester.pumpAndSettle();
 
       await tester.enterText(loginPassField, "P@ssword");
@@ -523,7 +523,7 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
       await tester.tap(find.text("Dlar Ry Skie"));
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
       await tester.tap(find.text("Reschedule Patient"));
       await tester.pumpAndSettle(const Duration(seconds: 7));
@@ -538,28 +538,12 @@ void main() {
             "Check app behavior when Reschedule Patient button is clicked. -- FAILED");
       }
 
-      /*
-      await tester.tap(find.text("Dlar Ry Skie"));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text("Remove Patient"));
-      await tester.pumpAndSettle(const Duration(seconds: 7));
-      
-      try {
-        expect(find.text("Dlar Ry Skie"), findsNothing);
-        testOutput.add(
-            "Check app behavior when Remove Patient button is clicked. -- PASSED");
-        passedTests++;
-      } catch (error) {
-        testOutput.add(
-            "Check app behavior when Remove Patient button is clicked. -- FAILED");
-      } //AWUI_MISS2
-*/
-      await tester.tap(find.text("Dlar Ry Skie"));
+      await tester.tap(patientToRemove);
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
       final firstCheckBox = find.byType(Checkbox).first;
       await tester.tap(firstCheckBox);
-      await tester.pumpAndSettle(const Duration(milliseconds: 500));
+      await tester.pumpAndSettle(const Duration(milliseconds: 1000));
 
       final CheckBoxReference = tester.widget<Checkbox>(firstCheckBox);
       try {
@@ -656,7 +640,7 @@ void main() {
       await tester.tap(vaccineDropdown);
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
       await tester.tap(find.widgetWithText(KeepAlive, 'All'));
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 3));
 
       try {
         //AWUI_MISSED9
@@ -669,8 +653,25 @@ void main() {
             "Check Sort Missed Vaccinations by Schedule for All vaccines. -- FAILED");
       }
 
-      await tester.tap(find.text("Sign-out"));
-      await tester.pumpAndSettle(const Duration(milliseconds: 500));
+      await tester.tap(patientToRemove);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text("Remove Patient"));
+      await tester.pumpAndSettle(const Duration(seconds: 7));
+      await Future.delayed(const Duration(seconds: 3), () {});
+
+      try {
+        expect(find.textContaining("Test"), findsNothing);
+        testOutput.add(
+            "Check app behavior when Remove Patient button is clicked. -- PASSED");
+        passedTests++;
+      } catch (error) {
+        testOutput.add(
+            "Check app behavior when Remove Patient button is clicked. -- FAILED");
+      } //AWUI_MISS2
+
+      await tester.tap(manageVax);
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+      await Future.delayed(const Duration(seconds: 5), () {});
     });
   });
   group("Account Settings - ", () {

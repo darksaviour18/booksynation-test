@@ -664,6 +664,7 @@ class _WebManageState extends State<WebManage> {
                             Container(
                               padding: EdgeInsets.only(top: 10),
                               child: TextFormField(
+                                key: Key("stockFormField"),
                                 onChanged: (value) {
                                   if (value == '') {
                                     vaccineData.stock = 0;
@@ -723,6 +724,7 @@ class _WebManageState extends State<WebManage> {
                               ),
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton<String>(
+                                  key: Key("vaccineDropdown"),
                                   value: schedulerData.vaccine,
                                   icon: const Icon(Icons.arrow_downward),
                                   iconSize: 18,
@@ -791,6 +793,7 @@ class _WebManageState extends State<WebManage> {
                               ),
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton<String>(
+                                  key: Key("categoryDropdown"),
                                   value: schedulerData.category,
                                   icon: const Icon(Icons.arrow_downward),
                                   iconSize: 18,
@@ -911,6 +914,7 @@ class _WebManageState extends State<WebManage> {
 
   Widget datePickerStart() {
     return InkWell(
+      key: Key("datePickerStart"),
       onTap: () => pickDateStart(context),
       child: Container(
         padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
@@ -940,6 +944,7 @@ class _WebManageState extends State<WebManage> {
 
   Widget datePickerEnd() {
     return InkWell(
+      key: Key("datePickerEnd"),
       onTap: () => pickDateEnd(context),
       child: Container(
         padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
